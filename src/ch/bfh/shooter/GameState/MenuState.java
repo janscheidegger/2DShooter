@@ -1,6 +1,7 @@
 package ch.bfh.shooter.GameState;
 
 import ch.bfh.shooter.Sprites.Background;
+import ch.bfh.shooter.assets.AssetManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -8,7 +9,7 @@ import java.awt.event.KeyEvent;
 /**
  * Created by Jan on 28.10.2014.
  */
-public class MenuState extends GameState {
+public class MenuState extends State {
 
     private Background bg;
     private String[] options = {
@@ -25,7 +26,7 @@ public class MenuState extends GameState {
 
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
-        bg = new Background("/backgrounds/menubg.gif");
+        bg = new Background(AssetManager.menuBackground);
 
         titleColor = new Color(128, 0, 0);
         titleFont = new Font("Century Gothic", Font.PLAIN, 28);
@@ -57,11 +58,15 @@ public class MenuState extends GameState {
             } else {
                 g.setColor(Color.LIGHT_GRAY);
             }
-            g.drawString(options[i], 145, 140+i*15);
+            g.drawString(options[i], 145, 140 + i * 15);
         }
     }
 
     private void select() {
+
+        if(currentChoice == 0) {
+            gsm.set(new GameState(gsm));
+        }
         System.out.println(currentChoice);
     }
 
@@ -71,17 +76,17 @@ public class MenuState extends GameState {
             select();
         }
         if (k == KeyEvent.VK_UP) {
-            currentChoice --;
-           if (currentChoice == -1) currentChoice = options.length -1;
+            currentChoice--;
+            if (currentChoice == -1) currentChoice = options.length - 1;
         }
         if (k == KeyEvent.VK_DOWN) {
-            currentChoice ++;
+            currentChoice++;
             if (currentChoice == options.length) currentChoice = 0;
         }
     }
 
-        @Override
-        public void keyReleased ( int k){
+    @Override
+    public void keyReleased(int k) {
 
-        }
     }
+}

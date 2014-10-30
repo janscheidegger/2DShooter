@@ -5,8 +5,8 @@ package ch.bfh.shooter.helper;
  */
 public interface ShooterConstants {
     public static String TITLE = "Shooter";
-    public static int WIDTH = 320;
-    public static int HEIGHT = 240;
-    public static int SCALE = 2;
+    public static int WIDTH = 640;
+    public static int HEIGHT = 480;
+    public static int TILE_SIZE = 32;
 
 }

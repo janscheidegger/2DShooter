@@ -8,13 +8,11 @@ import java.util.Stack;
  */
 public class GameStateManager {
 
-    private Stack<GameState> gameStates;
+    private Stack<State> gameStates;
 
-    public static final int MENUSTATE = 0;
-    public static final int PLAYSTATE = 1;
 
     public GameStateManager() {
-        gameStates = new Stack<GameState>();
+        gameStates = new Stack<State>();
 
         gameStates.push(new MenuState(this));
     }
