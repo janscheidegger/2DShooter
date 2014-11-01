@@ -1,9 +1,10 @@
 package ch.bfh.shooter.gameobjects;
 
 import ch.bfh.shooter.Sprites.Map;
+import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.helper.ShooterConstants;
 
-import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by jan on 31/10/14.
@@ -16,6 +17,7 @@ public class Hero extends MovableGameObject{
         this.y = 50;
         this.width = ShooterConstants.HERO_WIDTH;
         this.height = ShooterConstants.HERO_HEIGHT;
+        this.sprite = AssetManager.heroSprite;
     }
 
     @Override
@@ -33,16 +35,10 @@ public class Hero extends MovableGameObject{
         bottomLeft = map.getTileType(x/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE)==1;
         bottomRight = map.getTileType((x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE) ==1;
 
-        System.out.println("topLeft= "+topLeft);
-        System.out.println("topRight= "+topRight);
-        System.out.println("bottomLeft= "+bottomLeft);
-        System.out.println("bottomRight= "+bottomRight);
-
     }
 
-    @Override
-    public void draw(Graphics2D g) {
-        g.setColor(Color.RED);
-        g.fillRect(x,y,width,height);
+    public void shoot(ArrayList<Shot> shots) {
+        Shot shot = new Shot(this.x + width/2, this.y + height/2, rotation);
+        shots.add(shot);
     }
 }

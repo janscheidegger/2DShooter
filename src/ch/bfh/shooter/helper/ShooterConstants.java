@@ -10,5 +10,11 @@ public interface ShooterConstants {
     public static int TILE_SIZE = 32;
     public static int HERO_WIDTH = 16;
     public static int HERO_HEIGHT = 16;
+    public static int ENEMY_WIDTH = 16;
+    public static int ENEMY_HEIGHT = 16;
+    public static int SHOT_WIDTH = 4;
+    public static int SHOT_HEIGHT = 4;
+
+
 
 }
