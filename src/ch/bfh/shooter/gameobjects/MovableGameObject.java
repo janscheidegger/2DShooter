@@ -5,7 +5,14 @@ package ch.bfh.shooter.gameobjects;
  */
 public abstract class MovableGameObject extends GameObject {
 
-    public float dx;
-    public float dy;
+    protected float dx;
+    protected float dy;
+
+    //Collision Corners
+    protected boolean topLeft;
+    protected boolean topRight;
+    protected boolean bottomLeft;
+    protected boolean bottomRight;
+
 
 }

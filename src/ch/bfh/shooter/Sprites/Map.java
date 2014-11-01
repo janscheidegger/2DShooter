@@ -12,10 +12,12 @@ import java.util.ArrayList;
 public class Map {
     public static final int NOTHING = 0;
     public static final int BLOCK = 1;
+    private int[][] mapConfig;
 
     ArrayList<Block> blocks = new ArrayList<Block>();
 
     public Map(int[][] mapConfig) {
+        this.mapConfig = mapConfig;
         initBlocks(mapConfig);
     }
     public void draw(Graphics2D g) {
@@ -36,5 +38,14 @@ public class Map {
                 }
             }
         }
+    }
+
+    public ArrayList<Block> getBlocks() {
+        return blocks;
+    }
+
+    public int getTileType(int x, int y) {
+        return mapConfig[y][x];
+
     }
 }
