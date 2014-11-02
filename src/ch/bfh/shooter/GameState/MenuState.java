@@ -67,7 +67,12 @@ public class MenuState extends State {
         if(currentChoice == 0) {
             gsm.set(new GameState(gsm));
         }
-        System.out.println(currentChoice);
+        if(currentChoice == 1) {
+            gsm.push(new HelpScreen(gsm));
+        }
+        if(currentChoice == 2) {
+            System.exit(0);
+        }
     }
 
     @Override

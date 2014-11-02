@@ -67,7 +67,9 @@ public class WinState extends State {
         if(currentChoice == 0) {
             gsm.set(new GameState(gsm));
         }
-        System.out.println(currentChoice);
+        if(currentChoice == 1) {
+            System.exit(0);
+        }
     }
 
     @Override

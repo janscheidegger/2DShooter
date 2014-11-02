@@ -17,7 +17,7 @@ public class GameStateManager {
         gameStates.push(new MenuState(this));
     }
 
-    public void push(GameState state) {
+    public void push(State state) {
         gameStates.push(state);
     }
 

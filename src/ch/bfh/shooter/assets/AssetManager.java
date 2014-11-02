@@ -19,6 +19,7 @@ public class AssetManager {
     public static BufferedImage menuBackground = getBufferedImage("/backgrounds/menubg.gif");
     public static BufferedImage gameBackground = getBufferedImage("/backgrounds/map.png");
     public static BufferedImage winBackground = getBufferedImage("/backgrounds/winbg.png");
+    public static BufferedImage helpBackground = getBufferedImage("/backgrounds/helpbg.png");
     public static int[][] level1Map = parseMapFile("/tilemap/level1.mapconfig");
     public static BufferedImage heroSprite = getBufferedImage("/sprites/hero.png");
     public static BufferedImage enemySprite = getBufferedImage("/sprites/enemy.png");
