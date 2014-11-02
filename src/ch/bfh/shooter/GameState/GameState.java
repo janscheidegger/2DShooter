@@ -35,8 +35,8 @@ public class GameState extends State {
     }
 
     private void createEnemies() {
-        new Enemy(ShooterConstants.WIDTH-50, ShooterConstants.HEIGHT - 50, hero);
-        enemies.add(new Enemy(ShooterConstants.WIDTH-50, ShooterConstants.HEIGHT - 50, hero));
+        new Enemy(ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero);
+        enemies.add(new Enemy(ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero));
     }
 
     @Override
@@ -49,8 +49,10 @@ public class GameState extends State {
         hero.update();
         updateEnemies();
         updateShots();
-
+        checkShotCollision();
+        checkWinner();
     }
+
 
 
 
@@ -64,26 +66,48 @@ public class GameState extends State {
     }
 
     private void updateShots() {
-        for(Shot shot: shots) {
+        for (Shot shot : shots) {
             shot.update();
         }
     }
 
     private void drawShots(Graphics2D g) {
-        for(Shot shot: shots) {
+        for (Shot shot : shots) {
             shot.draw(g);
         }
     }
 
     private void updateEnemies() {
-        for(Enemy enemy: enemies) {
+        for (Enemy enemy : enemies) {
             enemy.update();
         }
     }
 
     private void drawEnemies(Graphics2D g) {
-        for(Enemy enemy: enemies) {
+        for (Enemy enemy : enemies) {
             enemy.draw(g);
+        }
+    }
+
+    private void checkShotCollision() {
+        for (int i = 0; i < shots.size(); i++) {
+            for (int j = 0; j < enemies.size(); j++) {
+                if (enemies.get(j).getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
+                    if (enemies.get(j).hit(10) <= 0) {
+                        enemies.remove(j);
+                    }
+                    shots.remove(i);
+                }
+            }
+            if (shots.size() > i && map.getTileType(shots.get(i).getX() / ShooterConstants.TILE_SIZE, shots.get(i).getY() / ShooterConstants.TILE_SIZE) == Map.BLOCK) {
+                shots.remove(i);
+            }
+        }
+    }
+
+    private void checkWinner() {
+        if(enemies.size() <= 0) {
+            gsm.set(new WinState(gsm));
         }
     }
 

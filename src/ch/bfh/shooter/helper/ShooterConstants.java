@@ -14,7 +14,5 @@ public interface ShooterConstants {
     public static int ENEMY_HEIGHT = 16;
     public static int SHOT_WIDTH = 4;
     public static int SHOT_HEIGHT = 4;
-
-
-
+    public static int ENEMY_MAXHEALTH = 50;
 }

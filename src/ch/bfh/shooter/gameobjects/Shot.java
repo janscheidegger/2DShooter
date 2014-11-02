@@ -28,5 +28,8 @@ public class Shot extends MovableGameObject {
         }if(rotation == 0) {
             this.y--;
         }
+
     }
+
+
 }

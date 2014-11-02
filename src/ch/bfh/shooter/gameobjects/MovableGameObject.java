@@ -22,7 +22,6 @@ public abstract class MovableGameObject extends GameObject {
     protected boolean down;
     protected int rotation;
 
-
     public boolean isUp() {
         return up;
     }

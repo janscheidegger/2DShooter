@@ -30,10 +30,10 @@ public class Hero extends MovableGameObject{
     }
 
     private void checkCollision() {
-        topLeft = map.getTileType(x/ShooterConstants.TILE_SIZE, y/ShooterConstants.TILE_SIZE) == 1;
-        topRight = map.getTileType((x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, y/ShooterConstants.TILE_SIZE) ==1;
-        bottomLeft = map.getTileType(x/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE)==1;
-        bottomRight = map.getTileType((x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE) ==1;
+        topLeft = map.getTileType(x/ShooterConstants.TILE_SIZE, y/ShooterConstants.TILE_SIZE) == Map.BLOCK;
+        topRight = map.getTileType((x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, y/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
+        bottomLeft = map.getTileType(x/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE)==Map.BLOCK;
+        bottomRight = map.getTileType((x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
 
     }
 
