@@ -48,15 +48,15 @@ public class WinState extends State {
         bg.draw(g);
         g.setColor(titleColor);
         g.setFont(titleFont);
-        g.drawString("You Won... Concrats", 80, 70);
+        g.drawString("You Won... Congrats", 80, 70);
 
         // options
         g.setFont(font);
         for (int i = 0; i < options.length; i++) {
             if (i == currentChoice) {
-                g.setColor(Color.WHITE);
+                g.setColor(Color.GREEN);
             } else {
-                g.setColor(Color.LIGHT_GRAY);
+                g.setColor(Color.BLACK);
             }
             g.drawString(options[i], 145, 140 + i * 15);
         }
