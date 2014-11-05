@@ -31,7 +31,7 @@ public class MenuState extends State {
         titleColor = new Color(128, 0, 0);
         titleFont = new Font("Century Gothic", Font.PLAIN, 28);
 
-        font = new Font("Arial", Font.PLAIN, 12);
+        font = new Font("Century Gothic", Font.PLAIN, 18);
     }
 
     @Override

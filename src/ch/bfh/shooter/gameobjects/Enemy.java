@@ -56,7 +56,7 @@ public class Enemy extends MovableGameObject {
         g.setColor(Color.GREEN);
         g.fillRect(x,y-10, health, 10);
         g.setColor(Color.RED);
-        g.fillRect(x+health,y-10, (int)((float)width / ShooterConstants.ENEMY_MAXHEALTH * (ShooterConstants.ENEMY_MAXHEALTH - health)), 10);
+        g.fillRect(x+health,y-10,  (ShooterConstants.ENEMY_MAXHEALTH - health), 10);
     }
 
 }

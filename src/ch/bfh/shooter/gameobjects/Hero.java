@@ -2,6 +2,7 @@ package ch.bfh.shooter.gameobjects;
 
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.assets.Sound;
 import ch.bfh.shooter.helper.ShooterConstants;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class Hero extends MovableGameObject{
     }
 
     public void shoot(ArrayList<Shot> shots) {
+        Sound.play(Sound.shoot);
         Shot shot = new Shot(this.x + width/2, this.y + height/2, rotation);
         shots.add(shot);
     }

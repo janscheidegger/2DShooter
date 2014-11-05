@@ -8,8 +8,6 @@ import java.awt.geom.AffineTransform;
  */
 public abstract class MovableGameObject extends GameObject {
 
-    protected float dx;
-    protected float dy;
 
     //Collision Corners
     protected boolean topLeft;

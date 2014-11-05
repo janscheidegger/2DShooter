@@ -20,10 +20,10 @@ public class AssetManager {
     public static BufferedImage gameBackground = getBufferedImage("/backgrounds/map.png");
     public static BufferedImage winBackground = getBufferedImage("/backgrounds/winbg.png");
     public static BufferedImage helpBackground = getBufferedImage("/backgrounds/helpbg.png");
-    public static int[][] level1Map = parseMapFile("/tilemap/level1.mapconfig");
     public static BufferedImage heroSprite = getBufferedImage("/sprites/hero.png");
     public static BufferedImage enemySprite = getBufferedImage("/sprites/enemy.png");
     public static BufferedImage shotSprite = getBufferedImage("/sprites/shot.png");
+    public static int[][] level1Map = parseMapFile("/tilemap/level1.mapconfig");
 
     private static BufferedImage getBufferedImage(String path) {
         BufferedImage image = null;
