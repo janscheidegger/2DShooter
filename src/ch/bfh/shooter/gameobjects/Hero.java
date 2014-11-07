@@ -4,6 +4,9 @@ import ch.bfh.shooter.Sprites.Hud;
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.assets.Sound;
+import ch.bfh.shooter.gameobjects.weapon.Pistol;
+import ch.bfh.shooter.gameobjects.weapon.Shot;
+import ch.bfh.shooter.gameobjects.weapon.Weapon;
 import ch.bfh.shooter.helper.ShooterConstants;
 
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import java.util.ArrayList;
  */
 public class Hero extends MovableGameObject{
 
+    Weapon weapon;
 
     public Hero(Map map, Hud hud) {
         this.health = ShooterConstants.HERO_MAXHEALTH;
@@ -22,6 +26,8 @@ public class Hero extends MovableGameObject{
         this.width = ShooterConstants.HERO_WIDTH;
         this.height = ShooterConstants.HERO_HEIGHT;
         this.sprite = AssetManager.heroSprite;
+
+        this.weapon = new Pistol();
     }
 
 
@@ -48,10 +54,9 @@ public class Hero extends MovableGameObject{
 
     }
 
-    public void shoot(ArrayList<Shot> shots) {
+    public void attack(ArrayList<Shot> shots) {
         Sound.play(Sound.shoot);
-        Shot shot = new Shot(this.x + width/2, this.y + height/2, rotation);
-        shots.add(shot);
+        weapon.attack(x + (ShooterConstants.HERO_WIDTH/2), y+(ShooterConstants.HERO_HEIGHT/2), shots, rotation);
     }
 
 

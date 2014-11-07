@@ -1,17 +1,24 @@
-package ch.bfh.shooter.gameobjects;
+package ch.bfh.shooter.gameobjects.weapon;
 
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.gameobjects.MovableGameObject;
 import ch.bfh.shooter.helper.ShooterConstants;
+
+import java.awt.image.BufferedImage;
 
 /**
  * Created by Jan on 02.11.2014.
  */
 public class Shot extends MovableGameObject {
-    public Shot(int x, int y, int rotation) {
+
+    private int damage;
+
+    public Shot(int x, int y, int rotation, int damage, BufferedImage sprite) {
+        this.damage = damage;
         this.x = x;
         this.y = y;
         this.rotation = rotation;
-        this.sprite = AssetManager.shotSprite;
+        this.sprite = sprite;
         this.width = ShooterConstants.SHOT_WIDTH;
         this.height = ShooterConstants.SHOT_HEIGHT;
 
@@ -31,5 +38,7 @@ public class Shot extends MovableGameObject {
 
     }
 
-
+    public int getDamage() {
+        return damage;
+    }
 }

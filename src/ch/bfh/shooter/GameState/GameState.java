@@ -6,7 +6,7 @@ import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
-import ch.bfh.shooter.gameobjects.Shot;
+import ch.bfh.shooter.gameobjects.weapon.Shot;
 import ch.bfh.shooter.gameobjects.attackstyle.StupidAttack;
 import ch.bfh.shooter.helper.ShooterConstants;
 
@@ -97,7 +97,7 @@ public class GameState extends State {
         for (int i = 0; i < shots.size(); i++) {
             for (int j = 0; j < enemies.size(); j++) {
                 if (enemies.get(j).getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
-                    if (enemies.get(j).hit(10) <= 0) {
+                    if (enemies.get(j).hit(shots.get(i).getDamage()) <= 0) {
                         enemies.remove(j);
                     }
                     shots.remove(i);
@@ -122,7 +122,7 @@ public class GameState extends State {
         if (k == KeyEvent.VK_RIGHT) hero.setRight(true);
         if (k == KeyEvent.VK_DOWN) hero.setDown(true);
         if (k == KeyEvent.VK_UP) hero.setUp(true);
-        if (k == KeyEvent.VK_SPACE) hero.shoot(shots);
+        if (k == KeyEvent.VK_SPACE) hero.attack(shots);
         if (k == KeyEvent.VK_ESCAPE) gsm.push(new HelpScreen(gsm));
     }
 
