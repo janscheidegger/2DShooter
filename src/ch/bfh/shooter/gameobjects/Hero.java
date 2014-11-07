@@ -16,9 +16,11 @@ import java.util.ArrayList;
  */
 public class Hero extends MovableGameObject{
 
-    Weapon weapon;
+    private Weapon weapon;
+    private Hud hud;
 
     public Hero(Map map, Hud hud) {
+        this.hud = hud;
         this.health = ShooterConstants.HERO_MAXHEALTH;
         this.map = map;
         this.x = 50;
@@ -26,8 +28,8 @@ public class Hero extends MovableGameObject{
         this.width = ShooterConstants.HERO_WIDTH;
         this.height = ShooterConstants.HERO_HEIGHT;
         this.sprite = AssetManager.heroSprite;
+        setWeapon(new Pistol());
 
-        this.weapon = new Pistol();
     }
 
 
@@ -57,6 +59,14 @@ public class Hero extends MovableGameObject{
     public void attack(ArrayList<Shot> shots) {
         Sound.play(Sound.shoot);
         weapon.attack(x + (ShooterConstants.HERO_WIDTH/2), y+(ShooterConstants.HERO_HEIGHT/2), shots, rotation);
+
+        hud.setCurrentMunitionCount(weapon.getMunition());
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+        hud.setWeaponImage(weapon.getWeaponImage());
+        hud.setCurrentMunitionCount(weapon.getMunition());
     }
 
 

@@ -6,6 +6,8 @@ import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
+import ch.bfh.shooter.gameobjects.weapon.Pistol;
+import ch.bfh.shooter.gameobjects.weapon.Rifle;
 import ch.bfh.shooter.gameobjects.weapon.Shot;
 import ch.bfh.shooter.gameobjects.attackstyle.StupidAttack;
 import ch.bfh.shooter.helper.ShooterConstants;
@@ -122,6 +124,8 @@ public class GameState extends State {
         if (k == KeyEvent.VK_RIGHT) hero.setRight(true);
         if (k == KeyEvent.VK_DOWN) hero.setDown(true);
         if (k == KeyEvent.VK_UP) hero.setUp(true);
+        if (k == KeyEvent.VK_1) hero.setWeapon(new Pistol());
+        if (k == KeyEvent.VK_2) hero.setWeapon(new Rifle());
         if (k == KeyEvent.VK_SPACE) hero.attack(shots);
         if (k == KeyEvent.VK_ESCAPE) gsm.push(new HelpScreen(gsm));
     }

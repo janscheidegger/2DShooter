@@ -10,7 +10,16 @@ public abstract class Weapon {
 
     protected int munition;
     protected int damage;
+    protected BufferedImage weaponImage;
     protected BufferedImage munitionSprite;
 
     public abstract void attack(int x, int y, ArrayList<Shot> shots, int rotation);
+    public int getMunition() {
+        return munition;
+    }
+
+
+    public BufferedImage getWeaponImage() {
+        return weaponImage;
+    }
 }

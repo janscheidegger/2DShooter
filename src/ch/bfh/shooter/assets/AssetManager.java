@@ -27,6 +27,8 @@ public class AssetManager {
     public static int[][] level1Map = parseMapFile("/tilemap/level1.mapconfig");
 
     public static BufferedImage hud = getBufferedImage("/sprites/hud.png");
+    public static BufferedImage pistolImage = getBufferedImage("/sprites/pistol.png");
+    public static BufferedImage rifleImage = getBufferedImage("/sprites/rifle.png");
 
     private static BufferedImage getBufferedImage(String path) {
         BufferedImage image = null;

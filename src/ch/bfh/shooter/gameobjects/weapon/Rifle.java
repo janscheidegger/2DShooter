@@ -8,14 +8,14 @@ import java.util.ArrayList;
 /**
  * Created by jan on 07/11/14.
  */
-public class Pistol extends  Weapon {
+public class Rifle extends  Weapon {
 
-    public Pistol() {
+    public Rifle() {
 
         this.munition = ShooterConstants.INITIAL_PISTOL_MUNITION;
         this.damage = ShooterConstants.PISTOL_DAMAGE;
         this.munitionSprite = AssetManager.shotSprite;
-        this.weaponImage = AssetManager.pistolImage;
+        this.weaponImage = AssetManager.rifleImage;
     }
 
 
