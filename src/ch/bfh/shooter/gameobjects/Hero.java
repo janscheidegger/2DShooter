@@ -28,6 +28,7 @@ public class Hero extends MovableGameObject{
         this.width = ShooterConstants.HERO_WIDTH;
         this.height = ShooterConstants.HERO_HEIGHT;
         this.sprite = AssetManager.heroSprite;
+        hud.setHeroHealth(health);
         setWeapon(new Pistol());
 
     }
@@ -67,6 +68,11 @@ public class Hero extends MovableGameObject{
         this.weapon = weapon;
         hud.setWeaponImage(weapon.getWeaponImage());
         hud.setCurrentMunitionCount(weapon.getMunition());
+    }
+
+    public int hit(int damage) {
+        hud.setHeroHealth(health - damage);
+        return super.hit(damage);
     }
 
 
