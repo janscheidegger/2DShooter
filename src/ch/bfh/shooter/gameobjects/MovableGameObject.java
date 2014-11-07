@@ -1,5 +1,7 @@
 package ch.bfh.shooter.gameobjects;
 
+import ch.bfh.shooter.Sprites.Map;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
@@ -19,6 +21,8 @@ public abstract class MovableGameObject extends GameObject {
     protected boolean right;
     protected boolean down;
     protected int rotation;
+    protected Map map;
+    protected int health;
 
     public boolean isUp() {
         return up;
@@ -72,4 +76,16 @@ public abstract class MovableGameObject extends GameObject {
         if(isDown()) rotation = 180;
     }
 
+    public Map getMap() {
+        return map;
+    }
+
+    public int hit(int damage) {
+        this.health -= damage;
+        return this.health;
+    }
+
+    public int getHealth() {
+        return health;
+    }
 }

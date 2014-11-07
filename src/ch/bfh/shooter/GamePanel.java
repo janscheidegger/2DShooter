@@ -25,14 +25,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     public GamePanel() {
         super();
-        setPreferredSize(new Dimension(ShooterConstants.WIDTH ,
-                ShooterConstants.HEIGHT));
+        setPreferredSize(new Dimension(ShooterConstants.WINDOW_WIDTH ,
+                ShooterConstants.WINDOW_HEIGHT));
         setFocusable(true);
         requestFocus();
     }
 
     private void init() {
-        image = new BufferedImage(ShooterConstants.WIDTH, ShooterConstants.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        image = new BufferedImage(ShooterConstants.WIDTH, ShooterConstants.WINDOW_HEIGHT, BufferedImage.TYPE_INT_RGB);
         g = (Graphics2D) image.getGraphics();
         running = true;
 
@@ -88,8 +88,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     private void drawToScreen() {
         Graphics g2 = getGraphics();
-        g2.drawImage(image, 0, 0, ShooterConstants.WIDTH,
-                ShooterConstants.HEIGHT, null);
+        g2.drawImage(image, 0, 0, ShooterConstants.WINDOW_WIDTH,
+                ShooterConstants.WINDOW_HEIGHT, null);
         g2.dispose();
     }
 

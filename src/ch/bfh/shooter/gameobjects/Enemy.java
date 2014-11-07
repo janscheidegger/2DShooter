@@ -1,6 +1,8 @@
 package ch.bfh.shooter.gameobjects;
 
+import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.gameobjects.attackstyle.Attack;
 import ch.bfh.shooter.helper.ShooterConstants;
 
 import java.awt.*;
@@ -11,9 +13,11 @@ import java.awt.*;
 public class Enemy extends MovableGameObject {
 
     Hero hero;
-    private int health;
+    private Attack attack;
 
-    public Enemy(int x, int y, Hero hero) {
+    public Enemy(Map map, int x, int y, Hero hero, Attack attack) {
+        this.map = map;
+        this.attack = attack;
         this.x = x;
         this.y = y;
         this.width = ShooterConstants.ENEMY_WIDTH;
@@ -25,31 +29,11 @@ public class Enemy extends MovableGameObject {
 
     @Override
     public void update() {
-        attackHero();
+        attack.attack(this, hero, map);
 
     }
 
-    private void attackHero() {
-        int heroX = hero.getX();
-        int heroY = hero.getY();
-        if(heroX > x) {
-            x++;
-        }
-        if(heroX < x) {
-            x--;
-        }
-        if(heroY > y) {
-            y++;
-        }
-        if(heroY < y) {
-            y--;
-        }
-    }
 
-    public int hit(int damage) {
-        this.health -= damage;
-        return this.health;
-    }
 
     public void draw(Graphics2D g) {
         super.draw(g);

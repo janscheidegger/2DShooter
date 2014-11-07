@@ -1,5 +1,6 @@
 package ch.bfh.shooter.gameobjects;
 
+import ch.bfh.shooter.Sprites.Hud;
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.assets.Sound;
@@ -11,8 +12,10 @@ import java.util.ArrayList;
  * Created by jan on 31/10/14.
  */
 public class Hero extends MovableGameObject{
-    private Map map;
-    public Hero(Map map) {
+
+
+    public Hero(Map map, Hud hud) {
+        this.health = ShooterConstants.HERO_MAXHEALTH;
         this.map = map;
         this.x = 50;
         this.y = 50;
@@ -21,13 +24,20 @@ public class Hero extends MovableGameObject{
         this.sprite = AssetManager.heroSprite;
     }
 
+
     @Override
     public void update() {
-        checkCollision();
-        if (!topLeft && !topRight && this.up) y --;
+        int tempX = x;
+        int tempY = y;
+        if (this.up) y --;
         if(!bottomLeft && !bottomRight && this.down) y ++;
         if(!topLeft && ! bottomLeft && this.left) x --;
         if(!topRight && !bottomRight && this.right) x++;
+        checkCollision();
+        if(topLeft || topRight && this.up) y = tempY;
+        if((bottomLeft || bottomRight) && this.down) y = tempY;
+        if((topLeft ||  bottomLeft) && this.left) x = tempX;
+        if((topRight || bottomRight) && this.right) x = tempX;
     }
 
     private void checkCollision() {
@@ -43,4 +53,8 @@ public class Hero extends MovableGameObject{
         Shot shot = new Shot(this.x + width/2, this.y + height/2, rotation);
         shots.add(shot);
     }
+
+
+
+
 }

@@ -1,11 +1,13 @@
 package ch.bfh.shooter.GameState;
 
 import ch.bfh.shooter.Sprites.Background;
+import ch.bfh.shooter.Sprites.Hud;
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
 import ch.bfh.shooter.gameobjects.Shot;
+import ch.bfh.shooter.gameobjects.attackstyle.StupidAttack;
 import ch.bfh.shooter.helper.ShooterConstants;
 
 import java.awt.*;
@@ -19,6 +21,7 @@ public class GameState extends State {
 
     private Background bg;
     private Map map;
+    private Hud hud;
     private Hero hero;
     private ArrayList<Enemy> enemies;
     private ArrayList<Shot> shots;
@@ -26,8 +29,9 @@ public class GameState extends State {
     public GameState(GameStateManager gsm) {
         this.gsm = gsm;
         bg = new Background(AssetManager.gameBackground);
+        hud = new Hud(AssetManager.hud);
         map = new Map(AssetManager.level1Map);
-        hero = new Hero(map);
+        hero = new Hero(map, hud);
         enemies = new ArrayList<Enemy>();
         shots = new ArrayList<Shot>();
         createEnemies();
@@ -35,8 +39,7 @@ public class GameState extends State {
     }
 
     private void createEnemies() {
-        new Enemy(ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero);
-        enemies.add(new Enemy(ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero));
+        enemies.add(new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero,new StupidAttack()) );
     }
 
     @Override
@@ -50,7 +53,7 @@ public class GameState extends State {
         updateEnemies();
         updateShots();
         checkShotCollision();
-        checkWinner();
+        checkEnd();
     }
 
 
@@ -60,6 +63,7 @@ public class GameState extends State {
     public void draw(Graphics2D g) {
         bg.draw(g);
         map.draw(g);
+        hud.draw(g);
         hero.draw(g);
         drawEnemies(g);
         drawShots(g);
@@ -105,7 +109,8 @@ public class GameState extends State {
         }
     }
 
-    private void checkWinner() {
+    private void checkEnd() {
+        if(hero.getHealth() <= 0) gsm.set(new LoseState(gsm));
         if(enemies.size() <= 0) {
             gsm.set(new WinState(gsm));
         }
@@ -118,6 +123,7 @@ public class GameState extends State {
         if (k == KeyEvent.VK_DOWN) hero.setDown(true);
         if (k == KeyEvent.VK_UP) hero.setUp(true);
         if (k == KeyEvent.VK_SPACE) hero.shoot(shots);
+        if (k == KeyEvent.VK_ESCAPE) gsm.push(new HelpScreen(gsm));
     }
 
     @Override
