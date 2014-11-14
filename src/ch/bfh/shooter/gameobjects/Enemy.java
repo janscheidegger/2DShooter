@@ -3,6 +3,7 @@ package ch.bfh.shooter.gameobjects;
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.attackstyle.Attack;
+import ch.bfh.shooter.gameobjects.attackstyle.StupidAttack;
 import ch.bfh.shooter.helper.ShooterConstants;
 
 import java.awt.*;
@@ -15,9 +16,8 @@ public class Enemy extends MovableGameObject {
     Hero hero;
     private Attack attack;
 
-    public Enemy(Map map, int x, int y, Hero hero, Attack attack) {
+    public Enemy(Map map, int x, int y, Hero hero) {
         this.map = map;
-        this.attack = attack;
         this.x = x;
         this.y = y;
         this.width = ShooterConstants.ENEMY_WIDTH;
@@ -25,12 +25,17 @@ public class Enemy extends MovableGameObject {
         this.hero = hero;
         this.sprite = AssetManager.enemySprite;
         this.health = ShooterConstants.ENEMY_MAXHEALTH;
+        this.attack = new StupidAttack(this, map);
     }
 
     @Override
     public void update() {
-        attack.attack(this, hero, map);
+        attack.attack(hero);
 
+    }
+
+    public void setAttack(Attack attack) {
+        this.attack = attack;
     }
 
 

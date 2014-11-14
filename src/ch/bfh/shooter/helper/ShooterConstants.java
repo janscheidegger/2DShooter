@@ -20,6 +20,8 @@ public interface ShooterConstants {
     public static int HERO_MAXHEALTH = 100;
     public static int INITIAL_PISTOL_MUNITION = 10;
     public static int PISTOL_DAMAGE = 10;
+    public static int PISTOL_COOLDOWN = 30;
     public static int INITIAL_RIFLE_MUNITION = 30;
     public static int RIFLE_DAMAGE = 10;
+    public static int RIFLE_COOLDOWN = 5;
 }

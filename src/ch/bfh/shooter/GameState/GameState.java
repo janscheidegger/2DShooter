@@ -6,6 +6,7 @@ import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
+import ch.bfh.shooter.gameobjects.attackstyle.ShootAttack;
 import ch.bfh.shooter.gameobjects.weapon.Pistol;
 import ch.bfh.shooter.gameobjects.weapon.Rifle;
 import ch.bfh.shooter.gameobjects.weapon.Shot;
@@ -41,7 +42,9 @@ public class GameState extends State {
     }
 
     private void createEnemies() {
-        enemies.add(new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero,new StupidAttack()) );
+        Enemy shooter = new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero);
+        //shooter.setAttack(new ShootAttack(shooter, map, shots));
+        enemies.add(shooter);
     }
 
     @Override
@@ -98,10 +101,14 @@ public class GameState extends State {
     private void checkShotCollision() {
         for (int i = 0; i < shots.size(); i++) {
             for (int j = 0; j < enemies.size(); j++) {
-                if (enemies.get(j).getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
+                if (shots.get(i).getOwner() != enemies.get(j) && enemies.get(j).getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
                     if (enemies.get(j).hit(shots.get(i).getDamage()) <= 0) {
                         enemies.remove(j);
                     }
+                    shots.remove(i);
+                }
+                else if(shots.get(i).getOwner() != hero && hero.getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
+                    hero.hit(shots.get(i).getDamage());
                     shots.remove(i);
                 }
             }
@@ -124,8 +131,8 @@ public class GameState extends State {
         if (k == KeyEvent.VK_RIGHT) hero.setRight(true);
         if (k == KeyEvent.VK_DOWN) hero.setDown(true);
         if (k == KeyEvent.VK_UP) hero.setUp(true);
-        if (k == KeyEvent.VK_1) hero.setWeapon(new Pistol());
-        if (k == KeyEvent.VK_2) hero.setWeapon(new Rifle());
+        if (k == KeyEvent.VK_1) hero.setWeapon(new Pistol(hero));
+        if (k == KeyEvent.VK_2) hero.setWeapon(new Rifle(hero));
         if (k == KeyEvent.VK_SPACE) hero.attack(shots);
         if (k == KeyEvent.VK_ESCAPE) gsm.push(new HelpScreen(gsm));
     }

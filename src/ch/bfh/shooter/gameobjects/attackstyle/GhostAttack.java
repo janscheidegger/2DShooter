@@ -7,7 +7,11 @@ import ch.bfh.shooter.gameobjects.MovableGameObject;
  * Created by jan on 07/11/14.
  */
 public class GhostAttack extends Attack {
-    public void attack(MovableGameObject self, MovableGameObject target, Map map) {
+    public GhostAttack(MovableGameObject self, Map map) {
+        super(self, map);
+    }
+
+    public void attack( MovableGameObject target) {
         int heroX = target.getX();
         int heroY = target.getY();
         if (heroX > self.x) {

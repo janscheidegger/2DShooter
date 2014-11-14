@@ -4,6 +4,7 @@ import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.MovableGameObject;
 import ch.bfh.shooter.helper.ShooterConstants;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.awt.image.BufferedImage;
 
 /**
@@ -12,8 +13,9 @@ import java.awt.image.BufferedImage;
 public class Shot extends MovableGameObject {
 
     private int damage;
+    private MovableGameObject owner;
 
-    public Shot(int x, int y, int rotation, int damage, BufferedImage sprite) {
+    public Shot(int x, int y, int rotation, int damage, BufferedImage sprite, MovableGameObject owner) {
         this.damage = damage;
         this.x = x;
         this.y = y;
@@ -21,6 +23,7 @@ public class Shot extends MovableGameObject {
         this.sprite = sprite;
         this.width = ShooterConstants.SHOT_WIDTH;
         this.height = ShooterConstants.SHOT_HEIGHT;
+        this.owner = owner;
 
     }
 
@@ -40,5 +43,9 @@ public class Shot extends MovableGameObject {
 
     public int getDamage() {
         return damage;
+    }
+
+    public MovableGameObject getOwner() {
+        return owner;
     }
 }

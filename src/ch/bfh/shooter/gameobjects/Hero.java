@@ -29,7 +29,7 @@ public class Hero extends MovableGameObject{
         this.height = ShooterConstants.HERO_HEIGHT;
         this.sprite = AssetManager.heroSprite;
         hud.setHeroHealth(health);
-        setWeapon(new Pistol());
+        setWeapon(new Pistol(this));
 
     }
 
@@ -47,6 +47,8 @@ public class Hero extends MovableGameObject{
         if((bottomLeft || bottomRight) && this.down) y = tempY;
         if((topLeft ||  bottomLeft) && this.left) x = tempX;
         if((topRight || bottomRight) && this.right) x = tempX;
+        System.out.println(weapon.getCooldown());
+        weapon.lowerCooldown();
     }
 
     private void checkCollision() {
@@ -59,7 +61,7 @@ public class Hero extends MovableGameObject{
 
     public void attack(ArrayList<Shot> shots) {
         Sound.play(Sound.shoot);
-        weapon.attack(x + (ShooterConstants.HERO_WIDTH/2), y+(ShooterConstants.HERO_HEIGHT/2), shots, rotation);
+        weapon.attack(x + (this.width/2), y+(this.width/2), shots, rotation, this);
 
         hud.setCurrentMunitionCount(weapon.getMunition());
     }

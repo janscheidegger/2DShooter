@@ -8,5 +8,13 @@ import ch.bfh.shooter.gameobjects.MovableGameObject;
  */
 public abstract class Attack {
 
-    public abstract void attack(MovableGameObject self, MovableGameObject target, Map map);
+    Map map;
+    MovableGameObject self;
+
+    public Attack(MovableGameObject self, Map map) {
+        this.map = map;
+        this.self = self;
+    }
+
+    public abstract void attack(MovableGameObject target);
 }

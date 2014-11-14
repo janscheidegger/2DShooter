@@ -14,13 +14,13 @@ public class StupidAttack extends Attack {
     private boolean bottomRight;
     private int attackDmg = 10;
 
-    public StupidAttack() {
+    public StupidAttack(MovableGameObject self, Map map) {
+        super(self, map);
     }
 
 
-
     @Override
-    public void attack(MovableGameObject self, MovableGameObject target, Map map) {
+    public void attack(MovableGameObject target) {
 
         self.setRight(target.getX() > self.x);
         self.setLeft(target.getX() < self.x);
