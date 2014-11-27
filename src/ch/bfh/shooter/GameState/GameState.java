@@ -61,9 +61,6 @@ public class GameState extends State {
         checkEnd();
     }
 
-
-
-
     @Override
     public void draw(Graphics2D g) {
         bg.draw(g);
