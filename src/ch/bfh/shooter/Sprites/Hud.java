@@ -35,7 +35,8 @@ public class Hud {
         g.drawImage(image, (int) x, (int) y, null);
         g.drawImage(weaponImage, (int)x+100, (int)y+30, null);
         g.setFont(new Font("Century Gothic", Font.PLAIN, 28));
-        g.drawString(Integer.toString(currentMunitionCount), (int) x + 20, (int) (y + (image.getHeight() / 2)));
+        g.setColor(Color.RED);
+        g.drawString(Integer.toString(currentMunitionCount), (int) x + 25, (int) (y + (image.getHeight() / 2)+5));
         g.setColor(Color.GREEN);
         g.fillRect((int)x+400, (int)y+30,heroHealth, 20);
         g.drawRect((int)x+400, (int)y+30,ShooterConstants.HERO_MAXHEALTH, 20);

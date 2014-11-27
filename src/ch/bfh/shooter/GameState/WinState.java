@@ -46,10 +46,6 @@ public class WinState extends State {
     @Override
     public void draw(Graphics2D g) {
         bg.draw(g);
-        g.setColor(titleColor);
-        g.setFont(titleFont);
-        g.drawString("You Won... Congrats", 80, 70);
-
         // options
         g.setFont(font);
         for (int i = 0; i < options.length; i++) {

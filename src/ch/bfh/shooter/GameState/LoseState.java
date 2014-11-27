@@ -45,9 +45,7 @@ public class LoseState extends State {
     @Override
     public void draw(Graphics2D g) {
         bg.draw(g);
-        g.setColor(titleColor);
-        g.setFont(titleFont);
-        g.drawString("You Lost... Loser", 80, 70);
+
 
         // options
         g.setFont(font);

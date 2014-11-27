@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class AssetManager {
 
-    public static BufferedImage menuBackground = getBufferedImage("/backgrounds/menubg.gif");
+    public static BufferedImage menuBackground = getBufferedImage("/backgrounds/menubg.png");
     public static BufferedImage gameBackground = getBufferedImage("/backgrounds/map.png");
     public static BufferedImage winBackground = getBufferedImage("/backgrounds/winbg.png");
     public static BufferedImage loseBackground = getBufferedImage("/backgrounds/losebg.png");

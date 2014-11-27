@@ -21,7 +21,7 @@ public class Block extends GameObject{
 
     @Override
     public void draw(Graphics2D g) {
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(x,y,width,height);
+        //g.setColor(Color.LIGHT_GRAY);
+        //g.fillRect(x,y,width,height);
     }
 }
