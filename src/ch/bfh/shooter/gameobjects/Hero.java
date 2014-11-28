@@ -18,6 +18,7 @@ public class Hero extends MovableGameObject{
 
     private Weapon weapon;
     private Hud hud;
+    private float speed;
 
     public Hero(Map map, Hud hud) {
         this.hud = hud;
@@ -29,6 +30,8 @@ public class Hero extends MovableGameObject{
         this.height = ShooterConstants.HERO_HEIGHT;
         this.sprite = AssetManager.heroSprite;
         hud.setHeroHealth(health);
+        this.speed = ShooterConstants.INITIAL_HERO_SPEED;
+
         setWeapon(new Pistol(this));
 
     }
@@ -36,12 +39,12 @@ public class Hero extends MovableGameObject{
 
     @Override
     public void update() {
-        int tempX = x;
-        int tempY = y;
-        if (this.up) y --;
-        if(!bottomLeft && !bottomRight && this.down) y ++;
-        if(!topLeft && ! bottomLeft && this.left) x --;
-        if(!topRight && !bottomRight && this.right) x++;
+        float tempX = x;
+        float tempY = y;
+        if (this.up) y -= this.speed;
+        if(!bottomLeft && !bottomRight && this.down) y += this.speed;
+        if(!topLeft && ! bottomLeft && this.left) x -=this.speed;
+        if(!topRight && !bottomRight && this.right) x+=this.speed;
         checkCollision();
         if(topLeft || topRight && this.up) y = tempY;
         if((bottomLeft || bottomRight) && this.down) y = tempY;
@@ -52,16 +55,16 @@ public class Hero extends MovableGameObject{
     }
 
     private void checkCollision() {
-        topLeft = map.getTileType(x/ShooterConstants.TILE_SIZE, y/ShooterConstants.TILE_SIZE) == Map.BLOCK;
-        topRight = map.getTileType((x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, y/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
-        bottomLeft = map.getTileType(x/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE)==Map.BLOCK;
-        bottomRight = map.getTileType((x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, (y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
+        topLeft = map.getTileType((int)x/ShooterConstants.TILE_SIZE, (int)y/ShooterConstants.TILE_SIZE) == Map.BLOCK;
+        topRight = map.getTileType(((int)x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, (int)y/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
+        bottomLeft = map.getTileType((int)x/ShooterConstants.TILE_SIZE, ((int)y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE)==Map.BLOCK;
+        bottomRight = map.getTileType(((int)x+ShooterConstants.HERO_WIDTH)/ShooterConstants.TILE_SIZE, ((int)y+ShooterConstants.HERO_HEIGHT)/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
 
     }
 
     public void attack(ArrayList<Shot> shots) {
         Sound.play(Sound.shoot);
-        weapon.attack(x + (this.width/2), y+(this.width/2), shots, rotation, this);
+        weapon.attack((int)x + (this.width/2), (int)y+(this.width/2), shots, rotation, this);
 
         hud.setCurrentMunitionCount(weapon.getMunition());
     }
@@ -76,8 +79,5 @@ public class Hero extends MovableGameObject{
         hud.setHeroHealth(health - damage);
         return super.hit(damage);
     }
-
-
-
 
 }

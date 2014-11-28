@@ -40,38 +40,38 @@ public class StupidAttack extends Attack {
     }
 
     private void moveDown(MovableGameObject self, Map map) {
-        int tempY = self.y;
-        self.y ++;
+        float tempY = self.y;
+        self.y +=self.getSpeed();
         checkCollision(self, map);
         if(bottomRight || bottomLeft) self.y = tempY;
     }
 
     private void moveUp(MovableGameObject self, Map map) {
-        int tempY = self.y;
-        self.y --;
+        float tempY = self.y;
+        self.y -=self.getSpeed();
         checkCollision(self, map);
         if(topLeft || topRight) self.y = tempY;
     }
 
     private void moveRight(MovableGameObject self, Map map) {
-        int tempX = self.x;
-        self.x ++;
+        float tempX = self.x;
+        self.x +=self.getSpeed();
         checkCollision(self, map);
         if(bottomLeft || bottomRight) self.x = tempX;
     }
 
     private void moveLeft(MovableGameObject self, Map map) {
-        int tempX = self.x;
-        self.x --;
+        float tempX = self.x;
+        self.x -=self.getSpeed();
         checkCollision(self, map);
         if(topLeft || bottomLeft) self.x = tempX;
     }
 
     private void checkCollision(MovableGameObject self, Map map) {
-        topLeft = map.getTileType(self.x/ ShooterConstants.TILE_SIZE, self.y/ShooterConstants.TILE_SIZE) == Map.BLOCK;
-        topRight = map.getTileType((self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, self.y/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
-        bottomLeft = map.getTileType(self.x/ShooterConstants.TILE_SIZE, (self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE)==Map.BLOCK;
-        bottomRight = map.getTileType((self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, (self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
+        topLeft = map.getTileType((int)self.x/ ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE) == Map.BLOCK;
+        topRight = map.getTileType(((int)self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
+        bottomLeft = map.getTileType((int)self.x/ShooterConstants.TILE_SIZE, ((int)self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE)==Map.BLOCK;
+        bottomRight = map.getTileType(((int)self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, ((int)self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
     }
 
 

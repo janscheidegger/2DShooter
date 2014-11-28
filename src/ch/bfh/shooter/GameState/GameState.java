@@ -42,7 +42,7 @@ public class GameState extends State {
     }
 
     private void createEnemies() {
-        Enemy shooter = new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, hero);
+        Enemy shooter = new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, .5f, hero);
         //shooter.setAttack(new ShootAttack(shooter, map, shots));
         enemies.add(shooter);
     }
@@ -109,7 +109,7 @@ public class GameState extends State {
                     shots.remove(i);
                 }
             }
-            if (shots.size() > i && map.getTileType(shots.get(i).getX() / ShooterConstants.TILE_SIZE, shots.get(i).getY() / ShooterConstants.TILE_SIZE) == Map.BLOCK) {
+            if (shots.size() > i && map.getTileType((int)shots.get(i).getX() / ShooterConstants.TILE_SIZE, (int)shots.get(i).getY() / ShooterConstants.TILE_SIZE) == Map.BLOCK) {
                 shots.remove(i);
             }
         }

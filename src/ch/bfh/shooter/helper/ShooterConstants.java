@@ -24,4 +24,6 @@ public interface ShooterConstants {
     public static int INITIAL_RIFLE_MUNITION = 30;
     public static int RIFLE_DAMAGE = 10;
     public static int RIFLE_COOLDOWN = 5;
+    public static float INITIAL_HERO_SPEED = 2.0f;
+    public static float INITIAL_SHOT_SPEED = 10.0f;
 }

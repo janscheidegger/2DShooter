@@ -28,8 +28,8 @@ public class ShootAttack extends Attack {
     public void attack(MovableGameObject target) {
 
         if(Math.abs(self.x - target.x) < 10) {
-            if(self.y > target.y) weapon.attack(self.x + ShooterConstants.ENEMY_WIDTH /2, self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 0, self);
-            if(self.y < target.y) weapon.attack(self.x + ShooterConstants.ENEMY_WIDTH /2, self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 1800, self);
+            if(self.y > target.y) weapon.attack((int)self.x + ShooterConstants.ENEMY_WIDTH /2, (int)self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 0, self);
+            if(self.y < target.y) weapon.attack((int)self.x + ShooterConstants.ENEMY_WIDTH /2, (int)self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 1800, self);
 
         }
         weapon.lowerCooldown();

@@ -16,12 +16,13 @@ public class Enemy extends MovableGameObject {
     Hero hero;
     private Attack attack;
 
-    public Enemy(Map map, int x, int y, Hero hero) {
+    public Enemy(Map map, int x, int y, float speed, Hero hero) {
         this.map = map;
         this.x = x;
         this.y = y;
         this.width = ShooterConstants.ENEMY_WIDTH;
         this.height = ShooterConstants.ENEMY_HEIGHT;
+        this.speed = speed;
         this.hero = hero;
         this.sprite = AssetManager.enemySprite;
         this.health = ShooterConstants.ENEMY_MAXHEALTH;
@@ -43,9 +44,9 @@ public class Enemy extends MovableGameObject {
     public void draw(Graphics2D g) {
         super.draw(g);
         g.setColor(Color.GREEN);
-        g.fillRect(x,y-10, health, 10);
+        g.fillRect((int)x,(int)y-10, health, 10);
         g.setColor(Color.RED);
-        g.fillRect(x+health,y-10,  (ShooterConstants.ENEMY_MAXHEALTH - health), 10);
+        g.fillRect((int)x+health,(int)y-10,  (ShooterConstants.ENEMY_MAXHEALTH - health), 10);
     }
 
 }

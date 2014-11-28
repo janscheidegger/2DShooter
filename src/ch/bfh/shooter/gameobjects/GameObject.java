@@ -6,8 +6,8 @@ import java.awt.*;
  * Created by jan on 31/10/14.
  */
 public abstract class GameObject {
-    public int x;
-    public int y;
+    public float x;
+    public float y;
     protected int width;
     protected int height;
     protected Image sprite;
@@ -20,14 +20,14 @@ public abstract class GameObject {
 
     public abstract void draw(Graphics2D g);
     public Rectangle getCollisionRect() {
-        return new Rectangle(x,y, width, height);
+        return new Rectangle((int)x,(int)y, width, height);
     }
 
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 }

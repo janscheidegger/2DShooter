@@ -23,6 +23,7 @@ public abstract class MovableGameObject extends GameObject {
     protected int rotation;
     protected Map map;
     protected int health;
+    protected float speed;
 
     public boolean isUp() {
         return up;
@@ -87,5 +88,13 @@ public abstract class MovableGameObject extends GameObject {
 
     public int getHealth() {
         return health;
+    }
+
+    public float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 }

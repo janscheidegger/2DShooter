@@ -12,19 +12,19 @@ public class GhostAttack extends Attack {
     }
 
     public void attack( MovableGameObject target) {
-        int heroX = target.getX();
-        int heroY = target.getY();
+        float heroX = target.getX();
+        float heroY = target.getY();
         if (heroX > self.x) {
-            self.x++;
+            self.x+=self.getSpeed();
         }
         if (heroX < self.x) {
-            self.x--;
+            self.x-=self.getSpeed();
         }
         if (heroY > self.y) {
-            self.y++;
+            self.y+=self.getSpeed();
         }
         if (heroY < self.y) {
-            self.y--;
+            self.y-=self.getSpeed();
         }
 
     }

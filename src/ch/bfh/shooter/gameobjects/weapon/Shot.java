@@ -21,6 +21,7 @@ public class Shot extends MovableGameObject {
         this.y = y;
         this.rotation = rotation;
         this.sprite = sprite;
+        this.speed = ShooterConstants.INITIAL_SHOT_SPEED;
         this.width = ShooterConstants.SHOT_WIDTH;
         this.height = ShooterConstants.SHOT_HEIGHT;
         this.owner = owner;
@@ -30,13 +31,13 @@ public class Shot extends MovableGameObject {
     @Override
     public void update() {
         if(rotation == 90) {
-            this.x++;
+            this.x+=this.speed;
         }if(rotation == 180) {
-            this.y++;
+            this.y+=this.speed;
         }if(rotation == 270) {
-            this.x--;
+            this.x -= this.speed;
         }if(rotation == 0) {
-            this.y--;
+            this.y-=this.speed;
         }
 
     }
