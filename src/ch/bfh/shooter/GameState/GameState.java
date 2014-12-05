@@ -7,6 +7,8 @@ import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
 import ch.bfh.shooter.gameobjects.attackstyle.ShootAttack;
+import ch.bfh.shooter.gameobjects.pickups.Heart;
+import ch.bfh.shooter.gameobjects.pickups.Pickup;
 import ch.bfh.shooter.gameobjects.weapon.Pistol;
 import ch.bfh.shooter.gameobjects.weapon.Rifle;
 import ch.bfh.shooter.gameobjects.weapon.Shot;
@@ -22,12 +24,15 @@ import java.util.ArrayList;
  */
 public class GameState extends State {
 
+    public static int enemyCount = 0;
+
     private Background bg;
     private Map map;
     private Hud hud;
     private Hero hero;
     private ArrayList<Enemy> enemies;
     private ArrayList<Shot> shots;
+    private ArrayList<Pickup> pickups;
 
     public GameState(GameStateManager gsm) {
         this.gsm = gsm;
@@ -37,18 +42,27 @@ public class GameState extends State {
         hero = new Hero(map, hud);
         enemies = new ArrayList<Enemy>();
         shots = new ArrayList<Shot>();
+        pickups = new ArrayList<Pickup>();
         createEnemies();
+        init();
 
     }
 
     private void createEnemies() {
-        Enemy shooter = new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, .5f, hero);
+        Enemy e1 = new Enemy(map, 50, ShooterConstants.HEIGHT - 50, .5f, hero);
+        Enemy e2 = new Enemy(map, ShooterConstants.WIDTH - 50, 50, .5f, hero);
+        Enemy e3 = new Enemy(map, 50, 50, .5f, hero);
+        Enemy e4 = new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, .5f, hero);
         //shooter.setAttack(new ShootAttack(shooter, map, shots));
-        enemies.add(shooter);
+        enemies.add(e1);
+        enemies.add(e2);
+        enemies.add(e3);
+        enemies.add(e4);
     }
 
     @Override
     public void init() {
+        pickups.add(new Heart(ShooterConstants.WIDTH - 100, ShooterConstants.HEIGHT - 100));
 
     }
 
@@ -58,7 +72,17 @@ public class GameState extends State {
         updateEnemies();
         updateShots();
         checkShotCollision();
+        checkPickupCollision();
         checkEnd();
+    }
+
+    private void checkPickupCollision() {
+        for (int i = 0; i < pickups.size(); i++) {
+            if(pickups.get(i).getCollisionRect().intersects(hero.getCollisionRect())) {
+                hero.collect(pickups.get(i));
+                pickups.remove(i);
+            }
+        }
     }
 
     @Override
@@ -66,47 +90,46 @@ public class GameState extends State {
         bg.draw(g);
         map.draw(g);
         hud.draw(g);
-        hero.draw(g);
         drawEnemies(g);
+        hero.draw(g);
         drawShots(g);
+        drawPickups(g);
+    }
+
+    private void drawPickups(final Graphics2D g) {
+        pickups.forEach(s -> s.draw(g));
     }
 
     private void updateShots() {
-        for (Shot shot : shots) {
-            shot.update();
-        }
+        shots.forEach(s -> s.update());
     }
 
     private void drawShots(Graphics2D g) {
-        for (Shot shot : shots) {
-            shot.draw(g);
-        }
+        shots.forEach(s -> s.draw(g));
     }
 
     private void updateEnemies() {
-        for (Enemy enemy : enemies) {
-            enemy.update();
-        }
+        enemies.forEach(s -> s.update());
     }
 
     private void drawEnemies(Graphics2D g) {
-        for (Enemy enemy : enemies) {
-            enemy.draw(g);
-        }
+        enemies.forEach(s -> s.draw(g));
     }
 
     private void checkShotCollision() {
         for (int i = 0; i < shots.size(); i++) {
             for (int j = 0; j < enemies.size(); j++) {
-                if (shots.get(i).getOwner() != enemies.get(j) && enemies.get(j).getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
+                if (shots.get(i).getOwner() != enemies.get(j) && enemies.get(j).getState() == Enemy.EnemyState.Alive && enemies.get(j).getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
                     if (enemies.get(j).hit(shots.get(i).getDamage()) <= 0) {
-                        enemies.remove(j);
+                        enemies.get(j).die();
                     }
                     shots.remove(i);
+                    break;
                 }
                 else if(shots.get(i).getOwner() != hero && hero.getCollisionRect().intersects(shots.get(i).getCollisionRect())) {
                     hero.hit(shots.get(i).getDamage());
                     shots.remove(i);
+                    break;
                 }
             }
             if (shots.size() > i && map.getTileType((int)shots.get(i).getX() / ShooterConstants.TILE_SIZE, (int)shots.get(i).getY() / ShooterConstants.TILE_SIZE) == Map.BLOCK) {
@@ -117,7 +140,7 @@ public class GameState extends State {
 
     private void checkEnd() {
         if(hero.getHealth() <= 0) gsm.set(new LoseState(gsm));
-        if(enemies.size() <= 0) {
+        if(enemyCount <= 0) {
             gsm.set(new WinState(gsm));
         }
     }

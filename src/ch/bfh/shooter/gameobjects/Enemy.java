@@ -1,5 +1,6 @@
 package ch.bfh.shooter.gameobjects;
 
+import ch.bfh.shooter.GameState.GameState;
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.gameobjects.attackstyle.Attack;
@@ -15,8 +16,21 @@ public class Enemy extends MovableGameObject {
 
     Hero hero;
     private Attack attack;
+    private EnemyState state;
+
+    public void die() {
+        this.state = EnemyState.Dead;
+        this.sprite = AssetManager.enemySpriteDead;
+        GameState.enemyCount--;
+    }
+
+    public enum EnemyState {
+        Dead, Alive
+    }
 
     public Enemy(Map map, int x, int y, float speed, Hero hero) {
+        GameState.enemyCount++;
+        this.state = EnemyState.Alive;
         this.map = map;
         this.x = x;
         this.y = y;
@@ -31,7 +45,9 @@ public class Enemy extends MovableGameObject {
 
     @Override
     public void update() {
-        attack.attack(hero);
+        if(this.state == EnemyState.Alive) {
+            attack.attack(hero);
+        }
 
     }
 
@@ -43,10 +59,15 @@ public class Enemy extends MovableGameObject {
 
     public void draw(Graphics2D g) {
         super.draw(g);
-        g.setColor(Color.GREEN);
-        g.fillRect((int)x,(int)y-10, health, 10);
-        g.setColor(Color.RED);
-        g.fillRect((int)x+health,(int)y-10,  (ShooterConstants.ENEMY_MAXHEALTH - health), 10);
+        if(this.state == EnemyState.Alive) {
+            g.setColor(Color.GREEN);
+            g.fillRect((int) x, (int) y - 10, health, 10);
+            g.setColor(Color.RED);
+            g.fillRect((int) x + health, (int) y - 10, (ShooterConstants.ENEMY_MAXHEALTH - health), 10);
+        }
     }
 
+    public EnemyState getState() {
+        return state;
+    }
 }

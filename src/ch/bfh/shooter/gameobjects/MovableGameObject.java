@@ -97,4 +97,8 @@ public abstract class MovableGameObject extends GameObject {
     public void setSpeed(float speed) {
         this.speed = speed;
     }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 }

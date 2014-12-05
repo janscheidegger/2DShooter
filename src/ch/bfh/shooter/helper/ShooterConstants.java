@@ -26,4 +26,6 @@ public interface ShooterConstants {
     public static int RIFLE_COOLDOWN = 5;
     public static float INITIAL_HERO_SPEED = 2.0f;
     public static float INITIAL_SHOT_SPEED = 10.0f;
+    public static int PICKUP_HEIGHT = 16;
+    public static int PICKUP_WIDTH = 16;
 }

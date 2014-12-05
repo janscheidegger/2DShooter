@@ -4,6 +4,7 @@ import ch.bfh.shooter.Sprites.Hud;
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.assets.Sound;
+import ch.bfh.shooter.gameobjects.pickups.Pickup;
 import ch.bfh.shooter.gameobjects.weapon.Pistol;
 import ch.bfh.shooter.gameobjects.weapon.Shot;
 import ch.bfh.shooter.gameobjects.weapon.Weapon;
@@ -24,8 +25,8 @@ public class Hero extends MovableGameObject{
         this.hud = hud;
         this.health = ShooterConstants.HERO_MAXHEALTH;
         this.map = map;
-        this.x = 50;
-        this.y = 50;
+        this.x = ShooterConstants.WIDTH/2;
+        this.y = ShooterConstants.HEIGHT/2;
         this.width = ShooterConstants.HERO_WIDTH;
         this.height = ShooterConstants.HERO_HEIGHT;
         this.sprite = AssetManager.heroSprite;
@@ -50,7 +51,6 @@ public class Hero extends MovableGameObject{
         if((bottomLeft || bottomRight) && this.down) y = tempY;
         if((topLeft ||  bottomLeft) && this.left) x = tempX;
         if((topRight || bottomRight) && this.right) x = tempX;
-        System.out.println(weapon.getCooldown());
         weapon.lowerCooldown();
     }
 
@@ -80,4 +80,13 @@ public class Hero extends MovableGameObject{
         return super.hit(damage);
     }
 
+    public void collect(Pickup pickup) {
+        pickup.getPower(this);
+    }
+
+    @Override
+    public void setHealth(int health) {
+        super.setHealth(health);
+        hud.setHeroHealth(health);
+    }
 }
