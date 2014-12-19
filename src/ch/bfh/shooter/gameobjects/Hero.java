@@ -33,8 +33,6 @@ public class Hero extends MovableGameObject{
         hud.setHeroHealth(health);
         this.speed = ShooterConstants.INITIAL_HERO_SPEED;
 
-        setWeapon(new Pistol(this));
-
     }
 
 
@@ -63,7 +61,6 @@ public class Hero extends MovableGameObject{
     }
 
     public void attack(ArrayList<Shot> shots) {
-        Sound.play(Sound.shoot);
         weapon.attack((int)x + (this.width/2), (int)y+(this.width/2), shots, rotation, this);
 
         hud.setCurrentMunitionCount(weapon.getMunition());

@@ -1,6 +1,7 @@
 package ch.bfh.shooter.gameobjects.weapon;
 
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.assets.Sound;
 import ch.bfh.shooter.gameobjects.MovableGameObject;
 import ch.bfh.shooter.helper.ShooterConstants;
 
@@ -23,8 +24,10 @@ public class Rifle extends  Weapon {
     private Shot shoot(int x, int y, int rotation) {
         if(munition > 0) {
             munition--;
+            Sound.play(Sound.shoot);
             return new Shot(x, y, rotation, damage , munitionSprite, owner);
         }
+        Sound.play(Sound.emptygun);
         return null;
     }
 

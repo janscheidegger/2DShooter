@@ -87,4 +87,9 @@ public class WinState extends State {
     public void keyReleased(int k) {
 
     }
+
+    @Override
+    public void exit() {
+
+    }
 }

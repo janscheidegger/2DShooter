@@ -88,4 +88,9 @@ public class LoseState extends State {
     public void keyReleased(int k) {
 
     }
+
+    @Override
+    public void exit() {
+
+    }
 }

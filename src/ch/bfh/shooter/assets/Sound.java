@@ -15,6 +15,7 @@ public class Sound {
     public static Clip heart = getSound("/sounds/heart.wav");
     public static Clip hurt = getSound("/sounds/hurt.wav");
     public static Clip select = getSound("/sounds/select.wav");
+    public static Clip emptygun = getSound("/sounds/emptygun.wav");
 
     private static Clip getSound(String path) {
 
@@ -23,7 +24,6 @@ public class Sound {
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
-            // Open audio clip and load samples from the audio input stream.
             clip.open(audioIn);
         } catch (LineUnavailableException e) {
             e.printStackTrace();

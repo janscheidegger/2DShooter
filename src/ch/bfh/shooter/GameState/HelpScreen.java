@@ -2,6 +2,7 @@ package ch.bfh.shooter.GameState;
 
 import ch.bfh.shooter.Sprites.Background;
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.assets.Sound;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -21,7 +22,7 @@ public class HelpScreen extends State {
 
     @Override
     public void init() {
-
+        Sound.loop(Sound.intro);
     }
 
     @Override
@@ -44,5 +45,10 @@ public class HelpScreen extends State {
     @Override
     public void keyReleased(int k) {
 
+    }
+
+    @Override
+    public void exit() {
+        Sound.stop(Sound.intro);
     }
 }

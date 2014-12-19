@@ -34,13 +34,12 @@ public class MenuState extends State {
 
         font = new Font("Century Gothic", Font.PLAIN, 18);
 
-        Sound.loop(Sound.intro);
 
     }
 
     @Override
     public void init() {
-
+        Sound.loop(Sound.intro);
     }
 
     @Override
@@ -98,6 +97,12 @@ public class MenuState extends State {
 
     @Override
     public void keyReleased(int k) {
+
+    }
+
+    @Override
+    public void exit() {
+        Sound.stop(Sound.intro);
 
     }
 }

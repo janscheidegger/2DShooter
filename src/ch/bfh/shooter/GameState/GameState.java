@@ -7,13 +7,12 @@ import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.assets.Sound;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
-import ch.bfh.shooter.gameobjects.attackstyle.ShootAttack;
 import ch.bfh.shooter.gameobjects.pickups.Heart;
 import ch.bfh.shooter.gameobjects.pickups.Pickup;
 import ch.bfh.shooter.gameobjects.weapon.Pistol;
 import ch.bfh.shooter.gameobjects.weapon.Rifle;
 import ch.bfh.shooter.gameobjects.weapon.Shot;
-import ch.bfh.shooter.gameobjects.attackstyle.StupidAttack;
+import ch.bfh.shooter.gameobjects.weapon.Weapon;
 import ch.bfh.shooter.helper.ShooterConstants;
 
 import java.awt.*;
@@ -34,6 +33,8 @@ public class GameState extends State {
     private ArrayList<Enemy> enemies;
     private ArrayList<Shot> shots;
     private ArrayList<Pickup> pickups;
+    private Weapon pistol;
+    private Weapon rifle;
 
     public GameState(GameStateManager gsm) {
         this.gsm = gsm;
@@ -45,7 +46,11 @@ public class GameState extends State {
         shots = new ArrayList<Shot>();
         pickups = new ArrayList<Pickup>();
         createEnemies();
-        init();
+        pickups.add(new Heart(ShooterConstants.WIDTH - 100, ShooterConstants.HEIGHT - 100));
+        pistol = new Pistol(hero);
+        rifle = new Rifle(hero);
+        hero.setWeapon(pistol);
+
 
     }
 
@@ -63,10 +68,7 @@ public class GameState extends State {
 
     @Override
     public void init() {
-        Sound.stop(Sound.intro);
         Sound.loop(Sound.gameMusic);
-        pickups.add(new Heart(ShooterConstants.WIDTH - 100, ShooterConstants.HEIGHT - 100));
-
     }
 
     @Override
@@ -154,8 +156,8 @@ public class GameState extends State {
         if (k == KeyEvent.VK_RIGHT) hero.setRight(true);
         if (k == KeyEvent.VK_DOWN) hero.setDown(true);
         if (k == KeyEvent.VK_UP) hero.setUp(true);
-        if (k == KeyEvent.VK_1) hero.setWeapon(new Pistol(hero));
-        if (k == KeyEvent.VK_2) hero.setWeapon(new Rifle(hero));
+        if (k == KeyEvent.VK_1) hero.setWeapon(pistol);
+        if (k == KeyEvent.VK_2) hero.setWeapon(rifle);
         if (k == KeyEvent.VK_SPACE) hero.attack(shots);
         if (k == KeyEvent.VK_ESCAPE) gsm.push(new HelpScreen(gsm));
     }
@@ -166,6 +168,11 @@ public class GameState extends State {
         if (k == KeyEvent.VK_RIGHT) hero.setRight(false);
         if (k == KeyEvent.VK_DOWN) hero.setDown(false);
         if (k == KeyEvent.VK_UP) hero.setUp(false);
+    }
+
+    @Override
+    public void exit() {
+        Sound.stop(Sound.gameMusic);
     }
 
 }

@@ -15,19 +15,28 @@ public class GameStateManager {
         gameStates = new Stack<State>();
 
         gameStates.push(new MenuState(this));
+        gameStates.peek().init();
     }
 
     public void push(State state) {
+        gameStates.peek().exit();
         gameStates.push(state);
+        gameStates.peek().init();
     }
 
     public void pop() {
+        if (gameStates.peek() != null) {
+            gameStates.peek().exit();
+        }
         gameStates.pop();
+        gameStates.peek().init();
     }
 
     public void set(State state) {
+        gameStates.peek().exit();
         gameStates.pop();
         gameStates.push(state);
+        gameStates.peek().init();
     }
 
     public void update() {
