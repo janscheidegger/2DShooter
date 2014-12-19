@@ -4,6 +4,7 @@ import ch.bfh.shooter.Sprites.Background;
 import ch.bfh.shooter.Sprites.Hud;
 import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.assets.Sound;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
 import ch.bfh.shooter.gameobjects.attackstyle.ShootAttack;
@@ -62,6 +63,8 @@ public class GameState extends State {
 
     @Override
     public void init() {
+        Sound.stop(Sound.intro);
+        Sound.loop(Sound.gameMusic);
         pickups.add(new Heart(ShooterConstants.WIDTH - 100, ShooterConstants.HEIGHT - 100));
 
     }

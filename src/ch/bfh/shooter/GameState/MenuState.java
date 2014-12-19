@@ -2,6 +2,7 @@ package ch.bfh.shooter.GameState;
 
 import ch.bfh.shooter.Sprites.Background;
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.assets.Sound;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -32,6 +33,9 @@ public class MenuState extends State {
         titleFont = new Font("Century Gothic", Font.PLAIN, 28);
 
         font = new Font("Century Gothic", Font.PLAIN, 18);
+
+        Sound.loop(Sound.intro);
+
     }
 
     @Override

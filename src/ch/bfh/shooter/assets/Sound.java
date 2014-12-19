@@ -10,7 +10,8 @@ import java.net.URL;
 public class Sound {
 
     public static Clip shoot = getSound("/sounds/lasershoot.wav");
-    public static Clip intor = getSound("/sounds/intro.wav");
+    public static Clip intro = getSound("/sounds/intro.wav");
+    public static Clip gameMusic = getSound("/sounds/gamemusic.wav");
 
     private static Clip getSound(String path) {
 
@@ -43,6 +44,10 @@ public class Sound {
 
     public static void loop(Clip clip) {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    public static void stop(Clip clip) {
+        clip.stop();
     }
 
 
