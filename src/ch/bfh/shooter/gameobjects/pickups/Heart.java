@@ -1,6 +1,7 @@
 package ch.bfh.shooter.gameobjects.pickups;
 
 import ch.bfh.shooter.assets.AssetManager;
+import ch.bfh.shooter.assets.Sound;
 import ch.bfh.shooter.gameobjects.Hero;
 import ch.bfh.shooter.helper.ShooterConstants;
 
@@ -22,6 +23,7 @@ public class Heart extends Pickup {
 
     @Override
     public void getPower(Hero hero) {
+        Sound.play(Sound.heart);
         hero.setHealth(hero.getHealth()+life);
         if(hero.getHealth()> ShooterConstants.HERO_MAXHEALTH) hero.setHealth(ShooterConstants.HERO_MAXHEALTH);
     }

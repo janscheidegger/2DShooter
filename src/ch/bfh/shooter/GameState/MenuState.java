@@ -85,10 +85,12 @@ public class MenuState extends State {
             select();
         }
         if (k == KeyEvent.VK_UP) {
+            Sound.play(Sound.select);
             currentChoice--;
             if (currentChoice == -1) currentChoice = options.length - 1;
         }
         if (k == KeyEvent.VK_DOWN) {
+            Sound.play(Sound.select);
             currentChoice++;
             if (currentChoice == options.length) currentChoice = 0;
         }

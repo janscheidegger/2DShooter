@@ -12,6 +12,9 @@ public class Sound {
     public static Clip shoot = getSound("/sounds/lasershoot.wav");
     public static Clip intro = getSound("/sounds/intro.wav");
     public static Clip gameMusic = getSound("/sounds/gamemusic.wav");
+    public static Clip heart = getSound("/sounds/heart.wav");
+    public static Clip hurt = getSound("/sounds/hurt.wav");
+    public static Clip select = getSound("/sounds/select.wav");
 
     private static Clip getSound(String path) {
 

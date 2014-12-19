@@ -70,12 +70,14 @@ public class Hero extends MovableGameObject{
     }
 
     public void setWeapon(Weapon weapon) {
+
         this.weapon = weapon;
         hud.setWeaponImage(weapon.getWeaponImage());
         hud.setCurrentMunitionCount(weapon.getMunition());
     }
 
     public int hit(int damage) {
+        Sound.play(Sound.hurt);
         hud.setHeroHealth(health - damage);
         return super.hit(damage);
     }
