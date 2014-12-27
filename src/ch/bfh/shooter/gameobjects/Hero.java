@@ -64,6 +64,7 @@ public class Hero extends MovableGameObject{
         weapon.attack((int)x + (this.width/2), (int)y+(this.width/2), shots, rotation, this);
 
         hud.setCurrentMunitionCount(weapon.getMunition());
+        hud.setMunitionInGun(weapon.getMunitionInGun());
     }
 
     public void setWeapon(Weapon weapon) {
@@ -71,6 +72,7 @@ public class Hero extends MovableGameObject{
         this.weapon = weapon;
         hud.setWeaponImage(weapon.getWeaponImage());
         hud.setCurrentMunitionCount(weapon.getMunition());
+        hud.setMunitionInGun(weapon.getMunitionInGun());
     }
 
     public int hit(int damage) {
@@ -87,5 +89,11 @@ public class Hero extends MovableGameObject{
     public void setHealth(int health) {
         super.setHealth(health);
         hud.setHeroHealth(health);
+    }
+
+    public void reload() {
+        this.weapon.reload();
+        hud.setCurrentMunitionCount(weapon.getMunition());
+        hud.setMunitionInGun(weapon.getMunitionInGun());
     }
 }

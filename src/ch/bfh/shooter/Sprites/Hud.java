@@ -13,6 +13,7 @@ public class Hud {
     private BufferedImage image;
     private BufferedImage weaponImage;
     private int currentMunitionCount;
+    private int munitionInGun;
     private int heroHealth;
 
     private double x;
@@ -36,7 +37,7 @@ public class Hud {
         g.drawImage(weaponImage, (int)x+100, (int)y+30, null);
         g.setFont(new Font("Century Gothic", Font.PLAIN, 28));
         g.setColor(Color.RED);
-        g.drawString(Integer.toString(currentMunitionCount), (int) x + 25, (int) (y + (image.getHeight() / 2)+5));
+        g.drawString(Integer.toString(munitionInGun) +"/"+Integer.toString(currentMunitionCount), (int) x + 25, (int) (y + (image.getHeight() / 2)+5));
         g.setColor(Color.GREEN);
         g.fillRect((int)x+400, (int)y+30,heroHealth, 20);
         g.drawRect((int)x+400, (int)y+30,ShooterConstants.HERO_MAXHEALTH, 20);
@@ -45,6 +46,8 @@ public class Hud {
     public void setCurrentMunitionCount(int count) {
         this.currentMunitionCount = count;
     }
+
+    public void setMunitionInGun(int count) { this.munitionInGun = count; }
 
     public void setWeaponImage(BufferedImage weaponImage) {
         this.weaponImage = weaponImage;

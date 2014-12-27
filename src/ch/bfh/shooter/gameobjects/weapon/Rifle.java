@@ -14,16 +14,19 @@ public class Rifle extends  Weapon {
 
     public Rifle(MovableGameObject owner) {
         super(owner);
-        this.munition = ShooterConstants.INITIAL_PISTOL_MUNITION;
+        this.capacity = ShooterConstants.RIFLE_CAPACITY;
+        this.munition = ShooterConstants.INITIAL_RIFLE_MUNITION;
         this.damage = ShooterConstants.PISTOL_DAMAGE;
         this.munitionSprite = AssetManager.shotSprite;
         this.weaponImage = AssetManager.rifleImage;
+
+        this.munitionInGun = this.capacity;
     }
 
 
     private Shot shoot(int x, int y, int rotation) {
-        if(munition > 0) {
-            munition--;
+        if(munitionInGun > 0) {
+            munitionInGun--;
             Sound.play(Sound.shoot);
             return new Shot(x, y, rotation, damage , munitionSprite, owner);
         }

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public abstract class Weapon {
 
     protected int cooldown;
+    protected int munitionInGun;
+    protected int capacity;
     protected int munition;
     protected int damage;
     protected BufferedImage weaponImage;
@@ -47,5 +49,31 @@ public abstract class Weapon {
 
     public int getCooldown() {
         return cooldown;
+    }
+
+    public void reload() {
+
+        int refilled = capacity - munitionInGun;
+
+        if(munition > 0 ) {
+
+            munitionInGun = munition > capacity ? capacity : munition;
+                if (munition > refilled) {
+                    munition -= refilled;
+                    System.out.println(capacity);
+                    System.out.println(munitionInGun);
+                    System.out.println(munition);
+                } else {
+                    munition = 0;
+                }
+            System.out.println("RELOAD;");
+        }
+         else {
+            System.out.println("No Munition left");
+        }
+    }
+
+    public int getMunitionInGun() {
+        return munitionInGun;
     }
 }

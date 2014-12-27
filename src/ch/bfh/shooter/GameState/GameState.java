@@ -161,6 +161,7 @@ public class GameState extends State {
         if (k == KeyEvent.VK_1) hero.setWeapon(pistol);
         if (k == KeyEvent.VK_2) hero.setWeapon(rifle);
         if (k == KeyEvent.VK_SPACE) hero.attack(shots);
+        if (k == KeyEvent.VK_R) hero.reload();
         if (k == KeyEvent.VK_ESCAPE) gsm.push(new HelpScreen(gsm));
     }
 
