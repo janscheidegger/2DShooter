@@ -7,6 +7,8 @@ import ch.bfh.shooter.assets.AssetManager;
 import ch.bfh.shooter.assets.Sound;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
+import ch.bfh.shooter.gameobjects.attackstyle.ShootAttack;
+import ch.bfh.shooter.gameobjects.attackstyle.SmarterAttack;
 import ch.bfh.shooter.gameobjects.pickups.Heart;
 import ch.bfh.shooter.gameobjects.pickups.Pickup;
 import ch.bfh.shooter.gameobjects.weapon.Pistol;
@@ -59,7 +61,7 @@ public class GameState extends State {
         Enemy e2 = new Enemy(map, ShooterConstants.WIDTH - 50, 50, .5f, hero);
         Enemy e3 = new Enemy(map, 50, 50, .5f, hero);
         Enemy e4 = new Enemy(map, ShooterConstants.WIDTH - 50, ShooterConstants.HEIGHT - 50, .5f, hero);
-        //shooter.setAttack(new ShootAttack(shooter, map, shots));
+        e1.setAttack(new ShootAttack(e1, map, shots));
         enemies.add(e1);
         enemies.add(e2);
         enemies.add(e3);

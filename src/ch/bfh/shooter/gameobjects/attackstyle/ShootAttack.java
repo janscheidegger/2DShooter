@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by jan on 14/11/14.
  */
-public class ShootAttack extends Attack {
+public class ShootAttack extends StupidAttack {
 
     ArrayList<Shot> shots;
     Weapon weapon = new Pistol(self);
@@ -29,8 +29,14 @@ public class ShootAttack extends Attack {
 
         if(Math.abs(self.x - target.x) < 10) {
             if(self.y > target.y) weapon.attack((int)self.x + ShooterConstants.ENEMY_WIDTH /2, (int)self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 0, self);
-            if(self.y < target.y) weapon.attack((int)self.x + ShooterConstants.ENEMY_WIDTH /2, (int)self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 1800, self);
-
+            if(self.y < target.y) weapon.attack((int)self.x + ShooterConstants.ENEMY_WIDTH /2, (int)self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 180, self);
+        }
+        else if(Math.abs(self.y - target.y) < 10) {
+            if(self.x > target.x) weapon.attack((int)self.x + ShooterConstants.ENEMY_WIDTH /2, (int)self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 270, self);
+            if(self.x < target.x) weapon.attack((int)self.x + ShooterConstants.ENEMY_WIDTH /2, (int)self.y + ShooterConstants.ENEMY_HEIGHT/2, shots, 90, self);
+        }
+        else {
+            super.attack(target);
         }
         weapon.lowerCooldown();
         

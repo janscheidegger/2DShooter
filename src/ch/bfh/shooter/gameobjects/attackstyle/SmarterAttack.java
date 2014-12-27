@@ -10,8 +10,25 @@ import java.util.ArrayList;
  * Created by jan on 28/11/14.
  */
 public class SmarterAttack extends Attack {
-    private ArrayList<Node> openNodes = new ArrayList<Node>();
-    private ArrayList<Node> closedNodes = new ArrayList<Node>();
+
+    private enum Directions {
+        left(0), right(1), up(2), down(3);
+
+        private int num;
+        Directions(int num) {
+            this.num = num;
+        }
+        public int getNum() {
+            return num;
+        }
+
+        public String getName() {
+            return name();
+        }
+    }
+
+    private int[] directionPriorities = new int[4];
+    int searchRadius = 50;
 
 
     public SmarterAttack(MovableGameObject self, Map map) {
@@ -21,44 +38,50 @@ public class SmarterAttack extends Attack {
 
     @Override
     public void attack(MovableGameObject target) {
-        aStar(self, target);
+        resetPriorities();
+        checkObstacles();
+        searchPlayer(target);
 
+        move();
+
+        debugPriorities();
     }
 
-    private void aStar(MovableGameObject self, MovableGameObject target) {
-        openNodes.add(new Node((int)self.x/ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE,0,0,0,null));
-        addNeighbours(openNodes, (int)self.x/ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE);
-        
+    private void move() {
+//        if()
     }
 
-    private void addNeighbours(ArrayList<Node> list, int xPos, int yPos) {
-        if(checkPosition(xPos,yPos)) {
-            //addNode()
+    private void searchPlayer(MovableGameObject target) {
+        if(target.getX() > self.x) directionPriorities[Directions.right.getNum()] = 2;
+        if(target.getX() < self.x) directionPriorities[Directions.left.getNum()] = 2;
+        if (target.getY() > self.y) directionPriorities[Directions.down.getNum()] = 2;
+        if (target.getY() < self.y) directionPriorities[Directions.up.getNum()] = 2;
+    }
+
+    private void checkObstacles() {
+        for(int i = 0; i <= searchRadius; i++) {
+            if(directionPriorities[Directions.left.getNum()] > 0 && map.getTileType((int)(self.getX() - i)/ShooterConstants.TILE_SIZE, (int)self.getY()/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+                directionPriorities[Directions.left.getNum()] = 0;
+            if(directionPriorities[Directions.right.getNum()] > 0 && map.getTileType((int)(self.getX() + i)/ShooterConstants.TILE_SIZE, (int)self.getY()/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+                directionPriorities[Directions.right.getNum()] = 0;
+            if(directionPriorities[Directions.up.getNum()] > 0 && map.getTileType((int)self.getX()/ShooterConstants.TILE_SIZE, (int)(self.getY() - i)/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+                directionPriorities[Directions.up.getNum()] = 0;
+            if(directionPriorities[Directions.down.getNum()] > 0 && map.getTileType((int)self.getX()/ShooterConstants.TILE_SIZE, (int)(self.getY() + i)/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+                directionPriorities[Directions.down.getNum()] = 0;
         }
     }
 
-    private boolean checkPosition(int x, int y) {
-        if(x>=0 && y>=0 && map.getTileType(x,y) != Map.BLOCK) {
-            return true;
+    private void resetPriorities() {
+        for (int i = 0; i < directionPriorities.length; i++) {
+            directionPriorities[i] = 1;
         }
-        return false;
+    }
+
+    private void debugPriorities() {
+       for(int dir : directionPriorities) {
+           System.out.println(dir);
+       }
     }
 
 
-}
-class Node {
-    private int x;
-    private int y;
-    private double g;
-    private double h;
-    private double f;
-    private Node parent;
-    public Node(int x, int y, double g, double h, double f, Node parent) {
-        this.x = x;
-        this.y = y;
-        this.g = g;
-        this.h = h;
-        this.f = f;
-        this.parent = parent;
-    }
 }
