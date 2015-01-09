@@ -1,3 +1,4 @@
+import ch.bfh.shooter.Sprites.Map;
 import ch.bfh.shooter.assets.AssetManager;
 import org.junit.Test;
 
@@ -7,7 +8,7 @@ import org.junit.Test;
 public class AssetManagerTest {
     @Test
     public void parseMapTest() {
-        int[][] map = AssetManager.parseMapFile("/tilemap/level1.mapconfig");
+        Map.TileType[][] map = AssetManager.parseMapFile("/tilemap/level1.mapconfig");
         System.out.println(map);
     }
 }

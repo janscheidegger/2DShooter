@@ -1,5 +1,6 @@
 package ch.bfh.shooter.assets;
 
+import ch.bfh.shooter.Sprites.Map;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
@@ -31,7 +32,7 @@ public class AssetManager {
     public static BufferedImage pistolImage = getBufferedImage("/sprites/pistol.png");
     public static BufferedImage rifleImage = getBufferedImage("/sprites/rifle.png");
 
-    public static int[][] level1Map = parseMapFile("/tilemap/level1.mapconfig");
+    public static Map.TileType[][] level1Map = parseMapFile("/tilemap/level1.mapconfig");
 
 
 
@@ -46,15 +47,15 @@ public class AssetManager {
         return image;
     }
 
-    public static int[][] parseMapFile(String path) {
+    public static Map.TileType[][] parseMapFile(String path) {
 
         String mapFile = readMapFile(path);
         String lines[] = mapFile.split("\\r?\\n");
         int width = lines[0].split(" ").length;
-        int[][] map = new int[lines.length][width];
+        Map.TileType[][] map = new Map.TileType[lines.length][width];
         for(int i = 0; i < lines.length; i++) {
             for(int j = 0; j < width; j++) {
-                map[i][j] = Integer.parseInt(lines[i].split(" ")[j]);
+                map[i][j] = Integer.parseInt(lines[i].split(" ")[j]) == 1 ? Map.TileType.BLOCK : Map.TileType.NOTHING;
             }
         }
 

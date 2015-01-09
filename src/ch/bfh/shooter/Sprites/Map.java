@@ -10,13 +10,15 @@ import java.util.ArrayList;
  * Created by jan on 31/10/14.
  */
 public class Map {
-    public static final int NOTHING = 0;
-    public static final int BLOCK = 1;
-    private int[][] mapConfig;
+
+    public static enum TileType {
+        NOTHING, BLOCK
+    }
+        private TileType[][] mapConfig;
 
     ArrayList<Block> blocks = new ArrayList<Block>();
 
-    public Map(int[][] mapConfig) {
+    public Map(TileType[][] mapConfig) {
         this.mapConfig = mapConfig;
         initBlocks(mapConfig);
     }
@@ -26,7 +28,7 @@ public class Map {
         }
     }
 
-    private void initBlocks(int[][] mapConfig) {
+    private void initBlocks(TileType[][] mapConfig) {
         for(int i = 0; i < mapConfig.length;i++) {
             for(int j = 0; j<mapConfig[0].length;j++) {
                 switch(mapConfig[i][j]) {
@@ -44,7 +46,7 @@ public class Map {
         return blocks;
     }
 
-    public int getTileType(int x, int y) {
+    public TileType getTileType(int x, int y) {
         return mapConfig[y][x];
 
     }

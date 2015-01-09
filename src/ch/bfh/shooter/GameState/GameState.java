@@ -8,7 +8,6 @@ import ch.bfh.shooter.assets.Sound;
 import ch.bfh.shooter.gameobjects.Enemy;
 import ch.bfh.shooter.gameobjects.Hero;
 import ch.bfh.shooter.gameobjects.attackstyle.ShootAttack;
-import ch.bfh.shooter.gameobjects.attackstyle.SmarterAttack;
 import ch.bfh.shooter.gameobjects.pickups.Heart;
 import ch.bfh.shooter.gameobjects.pickups.Pickup;
 import ch.bfh.shooter.gameobjects.weapon.Pistol;
@@ -139,7 +138,7 @@ public class GameState extends State {
                     break;
                 }
             }
-            if (shots.size() > i && map.getTileType((int)shots.get(i).getX() / ShooterConstants.TILE_SIZE, (int)shots.get(i).getY() / ShooterConstants.TILE_SIZE) == Map.BLOCK) {
+            if (shots.size() > i && map.getTileType((int)shots.get(i).getX() / ShooterConstants.TILE_SIZE, (int)shots.get(i).getY() / ShooterConstants.TILE_SIZE) == Map.TileType.BLOCK) {
                 shots.remove(i);
             }
         }

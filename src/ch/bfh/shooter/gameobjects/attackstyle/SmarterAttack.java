@@ -60,13 +60,13 @@ public class SmarterAttack extends Attack {
 
     private void checkObstacles() {
         for(int i = 0; i <= searchRadius; i++) {
-            if(directionPriorities[Directions.left.getNum()] > 0 && map.getTileType((int)(self.getX() - i)/ShooterConstants.TILE_SIZE, (int)self.getY()/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+            if(directionPriorities[Directions.left.getNum()] > 0 && map.getTileType((int)(self.getX() - i)/ShooterConstants.TILE_SIZE, (int)self.getY()/ShooterConstants.TILE_SIZE) == Map.TileType.BLOCK)
                 directionPriorities[Directions.left.getNum()] = 0;
-            if(directionPriorities[Directions.right.getNum()] > 0 && map.getTileType((int)(self.getX() + i)/ShooterConstants.TILE_SIZE, (int)self.getY()/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+            if(directionPriorities[Directions.right.getNum()] > 0 && map.getTileType((int)(self.getX() + i)/ShooterConstants.TILE_SIZE, (int)self.getY()/ShooterConstants.TILE_SIZE) == Map.TileType.BLOCK)
                 directionPriorities[Directions.right.getNum()] = 0;
-            if(directionPriorities[Directions.up.getNum()] > 0 && map.getTileType((int)self.getX()/ShooterConstants.TILE_SIZE, (int)(self.getY() - i)/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+            if(directionPriorities[Directions.up.getNum()] > 0 && map.getTileType((int)self.getX()/ShooterConstants.TILE_SIZE, (int)(self.getY() - i)/ShooterConstants.TILE_SIZE) == Map.TileType.BLOCK)
                 directionPriorities[Directions.up.getNum()] = 0;
-            if(directionPriorities[Directions.down.getNum()] > 0 && map.getTileType((int)self.getX()/ShooterConstants.TILE_SIZE, (int)(self.getY() + i)/ShooterConstants.TILE_SIZE) == Map.BLOCK)
+            if(directionPriorities[Directions.down.getNum()] > 0 && map.getTileType((int)self.getX()/ShooterConstants.TILE_SIZE, (int)(self.getY() + i)/ShooterConstants.TILE_SIZE) == Map.TileType.BLOCK)
                 directionPriorities[Directions.down.getNum()] = 0;
         }
     }

@@ -68,10 +68,10 @@ public class StupidAttack extends Attack {
     }
 
     private void checkCollision(MovableGameObject self, Map map) {
-        topLeft = map.getTileType((int)self.x/ ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE) == Map.BLOCK;
-        topRight = map.getTileType(((int)self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
-        bottomLeft = map.getTileType((int)self.x/ShooterConstants.TILE_SIZE, ((int)self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE)==Map.BLOCK;
-        bottomRight = map.getTileType(((int)self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, ((int)self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE) ==Map.BLOCK;
+        topLeft = map.getTileType((int)self.x/ ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE) == Map.TileType.BLOCK;
+        topRight = map.getTileType(((int)self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, (int)self.y/ShooterConstants.TILE_SIZE) ==Map.TileType.BLOCK;
+        bottomLeft = map.getTileType((int)self.x/ShooterConstants.TILE_SIZE, ((int)self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE)==Map.TileType.BLOCK;
+        bottomRight = map.getTileType(((int)self.x+ShooterConstants.ENEMY_WIDTH)/ShooterConstants.TILE_SIZE, ((int)self.y+ShooterConstants.ENEMY_HEIGHT)/ShooterConstants.TILE_SIZE) ==Map.TileType.BLOCK;
     }
 
 
