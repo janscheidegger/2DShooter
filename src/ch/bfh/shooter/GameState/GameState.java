@@ -153,10 +153,10 @@ public class GameState extends State {
 
     @Override
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_LEFT) hero.setLeft(true);
-        if (k == KeyEvent.VK_RIGHT) hero.setRight(true);
-        if (k == KeyEvent.VK_DOWN) hero.setDown(true);
-        if (k == KeyEvent.VK_UP) hero.setUp(true);
+        if (k == KeyEvent.VK_LEFT || k == KeyEvent.VK_A) hero.setLeft(true);
+        if (k == KeyEvent.VK_RIGHT || k == KeyEvent.VK_D) hero.setRight(true);
+        if (k == KeyEvent.VK_DOWN || k == KeyEvent.VK_S) hero.setDown(true);
+        if (k == KeyEvent.VK_UP || k == KeyEvent.VK_W) hero.setUp(true);
         if (k == KeyEvent.VK_1) hero.setWeapon(pistol);
         if (k == KeyEvent.VK_2) hero.setWeapon(rifle);
         if (k == KeyEvent.VK_SPACE) hero.attack(shots);
